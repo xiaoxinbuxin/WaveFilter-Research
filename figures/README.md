@@ -1,13 +1,22 @@
 # Figures
 
-This directory is reserved for non-proprietary visualizations used in the public research portfolio.
+This directory contains **public-safe, non-proprietary visualizations** for the research portfolio.
 
-Recommended figures include:
+## Included
 
-- conceptual architecture diagrams
-- anonymized examples of the visible wave-state output
-- volatility-warning examples
-- validation workflow diagrams
-- aggregate robustness plots
+- [`research_architecture.svg`](research_architecture.svg) — conceptual system architecture, including the causal core, independent challenger modules, and validation governance.
+- [`synthetic_wave_state_demo.svg`](synthetic_wave_state_demo.svg) — a synthetic illustration of price, wave-state behavior, and generic volatility-risk windows. It is **not** production output.
 
-Do not upload screenshots or figures that expose proprietary formulas, exact parameter values, account information, API credentials, or private source code.
+## Disclosure boundary
+
+The figures intentionally omit:
+
+- production formulas
+- exact calibrated parameters
+- Pine Script source code
+- private AutoLab implementation
+- raw private datasets
+- execution-specific trading rules
+- account or API information
+
+Visualizations in this directory are intended to communicate the **research design and interpretation**, not to reconstruct the proprietary implementation.

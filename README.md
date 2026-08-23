@@ -64,15 +64,25 @@ The public architecture intentionally omits formulas, implementation details, an
 
 ## Real-market examples
 
-The same visible sub-chart framework has been inspected on multiple asset classes, including:
+### Bitcoin / BTCUSDT perpetual — 1H
 
-- **Bitcoin / BTCUSDT perpetual — 1H**
-- **NVIDIA / NVDA — 4H**
-- **Gold / XAUUSD — 1H and 4H**
+![BTCUSDT WaveFilter example](figures/btc_wavefilter_real.jpg)
 
-These examples are used to illustrate market-state behavior, extreme-zone transitions, volatility-risk context, and divergence-style visual interpretation. They do **not** expose the production implementation and are not presented as trading recommendations.
+Crypto example showing repeated wave-state transitions, extreme-zone behavior, and divergence-style visual interpretation.
 
-See [`figures/real_examples.md`](figures/real_examples.md) for the public interpretation notes. Real-chart image files are intentionally handled separately from the proprietary source tree.
+### NVIDIA / NVDA — 4H
+
+![NVDA WaveFilter example](figures/nvda_wavefilter_real.jpg)
+
+Equity example showing the same sub-chart framework applied to a large-cap technology stock over a higher timeframe.
+
+### Gold / XAUUSD — 1H
+
+![XAUUSD WaveFilter example](figures/xauusd_wavefilter_real.jpg)
+
+Commodity example showing the framework during a sustained directional move with repeated upper-zone pressure and visible momentum deceleration.
+
+These screenshots expose only visible chart output. They do **not** disclose the production implementation and are not presented as trading recommendations.
 
 ## Validation workflow
 
@@ -158,7 +168,10 @@ WaveFilter-Research/
 │   ├── README.md
 │   ├── real_examples.md
 │   ├── research_architecture.svg
-│   └── synthetic_wave_state_demo.svg
+│   ├── synthetic_wave_state_demo.svg
+│   ├── btc_wavefilter_real.jpg
+│   ├── nvda_wavefilter_real.jpg
+│   └── xauusd_wavefilter_real.jpg
 └── notebooks/
     ├── README.md
     └── public_demo.ipynb

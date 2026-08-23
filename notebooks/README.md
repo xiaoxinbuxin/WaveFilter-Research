@@ -1,13 +1,26 @@
 # Public Notebooks
 
-This directory is reserved for reproducible, non-proprietary demonstrations of the research workflow.
+This directory contains reproducible, non-proprietary demonstrations of the research workflow.
 
-Suitable notebook topics include:
+## Included notebook
 
-- causal event labeling on synthetic or public sample data
-- time-ordered train/development/holdout splitting
-- block-bootstrap examples
-- cross-dataset stability analysis
-- generic volatility-regime evaluation
+[`public_demo.ipynb`](public_demo.ipynb) demonstrates, using **synthetic data only**:
 
-The production indicator formula, exact parameterization, private AutoLab implementation, and proprietary trading logic should not be included here.
+- causal event construction without look-ahead
+- time-ordered development / holdout splitting
+- non-directional volatility-risk evaluation
+- block-bootstrap uncertainty analysis
+- separation between research evidence and trading claims
+
+The notebook is intentionally illustrative. Its thresholds, synthetic data generator, and event logic are **not** the production indicator and are not calibrated from the private research system.
+
+## Not included
+
+- production indicator formulas
+- exact parameterization
+- Pine Script source
+- private AutoLab implementation
+- raw private datasets
+- proprietary execution logic
+
+The purpose is to make the **research methodology reproducible** without exposing the private implementation.

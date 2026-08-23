@@ -1,0 +1,30 @@
+# Proprietary / production source
+*.pine
+private/
+proprietary/
+AutoLab/
+
+# Raw or sensitive research data
+raw_data/
+data/private/
+*.parquet
+*.feather
+*.pickle
+*.pkl
+
+# Secrets / credentials
+.env
+.env.*
+*.key
+*.pem
+credentials*
+secrets*
+
+# Local artifacts
+.DS_Store
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
+dist/
+runs/

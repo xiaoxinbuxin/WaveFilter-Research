@@ -1,39 +1,47 @@
 # WaveFilter Research
 
-A research portfolio on causal market-state filtering, volatility regime detection, and systematic validation for cryptocurrency time series.
+**Causal market-state filtering, volatility-risk detection, and systematic validation across financial time series.**
 
-> **Source-code note:** the production indicator implementation, proprietary parameterization, and private research pipeline are intentionally not included in this public repository. This repository focuses on the research questions, experimental design, validation methodology, and non-proprietary results.
+This repository is a graduate-application research portfolio documenting the design and validation of a proprietary market-state filtering framework. The production indicator source code, calibrated parameters, and private AutoLab implementation are intentionally withheld; the public repository focuses on research questions, experimental design, reproducibility, validation discipline, and non-proprietary findings.
 
-## Project motivation
+## Research question
 
-Technical indicators often look convincing in hindsight but fail when exposed to new market regimes, execution costs, or strict causal evaluation. This project studies a different question:
+Technical indicators can look convincing in hindsight while failing under new market regimes, execution costs, or strict causal evaluation. This project studies a narrower and more testable problem:
 
-**Can a market-state filter remain responsive enough to capture meaningful regime changes while reducing short-lived reversals and avoiding look-ahead bias?**
+> **Can a market-state filter remain responsive to meaningful structural change while reducing short-lived reversals, avoiding look-ahead bias, and preserving robustness across assets and timeframes?**
 
-The project evolved from a simple visual oscillator into a research framework with explicit Champion/Challenger versioning, cross-asset testing, sealed holdouts, platform-parity checks, and systematic rejection of extensions that did not survive validation.
+The project evolved from a visual oscillator into a research framework with explicit **Champion / Challenger governance**, cross-asset tests, sealed holdouts, platform-parity audits, and systematic rejection of extensions that did not survive out-of-sample validation.
 
-## Research objectives
+## Key results
 
-- Build a causal, non-repainting wave-state representation for market pressure and structural transitions.
-- Separate visible state changes from more conservative internal structural confirmation.
-- Detect changes in volatility risk without interpreting volatility as directional alpha.
-- Evaluate candidate extensions with time-ordered development and sealed holdout data.
-- Preserve negative results instead of promoting features only because they improve in-sample performance.
-- Verify consistency between TradingView/Pine execution and an independent Python research implementation.
+| Research component | Public result | Decision |
+|---|---:|---|
+| Core wave-state filter | Stable across repeated challenger tests | **Champion retained** |
+| Standard volatility warning | High-volatility rate increased from **31.2% to 65.4%** in one sealed-holdout study | **Validated as non-directional risk information** |
+| Volatility-warning stability | Positive lift across all 9 evaluated folds in the cited study | **Retained** |
+| Multi-timeframe confirmation | Development evidence did not survive execution-cost / holdout requirements | **Rejected** |
+| Divergence trading extensions | Visually promising but not robust enough under sealed validation | **Not promoted to trading logic** |
+| Adaptive-threshold / acceleration experiments | Failed stability or regret guardrails | **Rejected** |
 
-## Visual overview
+These results are research findings, not claims of future trading profitability.
+
+## Why this project is different from a typical indicator demo
+
+The main contribution is not a single chart signal. It is the **research process used to decide what should and should not be trusted**.
+
+- causal, non-repainting event construction
+- time-ordered development / holdout splits
+- sealed holdout datasets opened only after rules were frozen
+- cross-asset and cross-timeframe evaluation
+- TradingView / Pine ↔ Python parity checks
+- block-bootstrap uncertainty analysis
+- transaction-cost and execution-delay stress tests
+- negative-result retention instead of cherry-picking
+- Champion / Challenger version governance
+
+## System overview
 
 ![WaveFilter public research architecture](figures/research_architecture.svg)
-
-The figure above shows the public conceptual architecture. Production formulas, source code, and calibrated parameters are intentionally omitted.
-
-A second figure provides a completely synthetic illustration of how market-state and volatility-risk concepts can be communicated without exposing the production indicator:
-
-![Synthetic wave-state example](figures/synthetic_wave_state_demo.svg)
-
-> The synthetic figure is **not production output** and should not be interpreted as a trading example.
-
-## High-level architecture
 
 ```text
 Market data
@@ -44,7 +52,7 @@ Robust noise normalization
     ↓
 Evidence accumulation
     ↓
-Dual-state transition logic
+Internal structural state
     ↓
 Visible wave-state representation
     ↓
@@ -52,33 +60,76 @@ Independent research modules
 (volatility risk, divergence studies, multi-timeframe context)
 ```
 
-The public documentation intentionally omits production formulas, parameter values, and source code.
+The public architecture intentionally omits formulas, implementation details, and calibrated parameter values.
 
-## Validation philosophy
+## Real-market examples
 
-The project uses a deliberately conservative research process:
+The same visible sub-chart framework has been inspected on multiple asset classes, including:
 
-1. **Development-only opportunity diagnostics** before parameter search.
-2. **Time-ordered splits** rather than random train/test shuffling.
-3. **Sealed holdout sets** opened only after rules and evaluation gates are frozen.
-4. **Cross-asset and cross-timeframe validation** across BTC, ETH, and SOL studies.
-5. **TradingView ↔ Python parity checks** to detect implementation mismatches.
-6. **Block-bootstrap and stability analysis** to reduce confidence inflation from correlated events.
-7. **Transaction-cost and execution-delay stress tests** for candidate trading applications.
-8. **Negative-result retention** when a feature fails robustness or holdout gates.
+- **Bitcoin / BTCUSDT perpetual — 1H**
+- **NVIDIA / NVDA — 4H**
+- **Gold / XAUUSD — 1H and 4H**
 
-## Selected non-proprietary findings
+These examples are used to illustrate market-state behavior, extreme-zone transitions, volatility-risk context, and divergence-style visual interpretation. They do **not** expose the production implementation and are not presented as trading recommendations.
 
-- The core wave-state filter was retained as the production **Champion** after multiple candidate acceleration, threshold-adaptation, warning, divergence, and multi-timeframe extensions failed robustness or holdout requirements.
-- A non-directional volatility-warning module showed reproducible information about **future volatility risk**, while being explicitly separated from directional trading logic.
-- In one sealed-holdout study, the observed high-volatility rate increased from **31.2% baseline to 65.4% after a standard volatility warning**, with positive lift across all nine evaluated folds spanning 15-minute, 1-hour, and 4-hour studies.
-- Several visually promising divergence and multi-timeframe candidates were rejected after their development-set performance failed to persist after costs, stability checks, or sealed-holdout evaluation.
+See [`figures/real_examples.md`](figures/real_examples.md) for the public interpretation notes. Real-chart image files are intentionally handled separately from the proprietary source tree.
 
-These results are research findings, not a claim of future trading profitability.
+## Validation workflow
+
+```text
+Research idea
+    ↓
+Development-only opportunity diagnostic
+    ↓
+Candidate implementation
+    ↓
+Causal / parity audit
+    ↓
+Cross-dataset robustness checks
+    ↓
+Freeze rules and evaluation gates
+    ↓
+Open sealed holdout once
+    ↓
+Promote, restrict, or reject
+```
+
+A candidate is not accepted because it improves a few selected charts. It must survive the same protocol used for competing ideas.
+
+## Selected research lessons
+
+### 1. Better-looking signals are not necessarily better models
+
+Several additions produced attractive historical examples but failed holdout, cost, or stability tests. Those modules were rejected rather than added to the production indicator.
+
+### 2. Volatility information should not be confused with direction
+
+The volatility-warning module is deliberately non-directional. Its role is to identify a higher-volatility regime, not predict whether price should rise or fall.
+
+### 3. Visible responsiveness and structural confirmation can be separated
+
+The framework distinguishes a visible wave-state representation from a more conservative internal structural state. This reduces the need to choose between an overly reactive display and an overly delayed structural filter.
+
+### 4. Negative results are part of the research output
+
+Failed ER acceleration, adaptive-threshold, divergence, warning, and multi-timeframe ideas are documented because they constrain what the final system is allowed to claim.
+
+## Research timeline
+
+| Stage | Main question | Outcome |
+|---|---|---|
+| Early baseline | Can a simple wave-state oscillator represent directional pressure? | Useful visually, but too sensitive to short-lived changes |
+| Structural filtering | Can evidence accumulation reduce unnecessary reversals? | Improved stability; retained as core architecture |
+| Dual-state design | Can the visible line remain responsive without forcing structural reversals? | Adopted |
+| Adaptive recovery / resynchronization | Can visual lag be reduced without destabilizing structure? | Selective improvements retained |
+| Volatility research | Can the framework identify future volatility risk without directional claims? | Standard warning validated |
+| Divergence research | Do visual divergences add robust trading value? | Not validated as independent trading logic |
+| Multi-timeframe research | Does higher/lower-timeframe confirmation add executable value? | Rejected after cost / holdout evaluation |
+| Current stage | Preserve validated core and document the research process | Public portfolio + private production implementation |
 
 ## Reproducible public demo
 
-[`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) provides a synthetic, non-proprietary demonstration of the research workflow. It includes:
+[`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) provides a synthetic, non-proprietary demonstration of the methodology. It includes:
 
 - causal event construction using historical information only
 - time-ordered development / holdout splitting
@@ -88,7 +139,7 @@ These results are research findings, not a claim of future trading profitability
 
 The notebook does **not** reproduce the production WaveFilter algorithm.
 
-## Repository map
+## Repository structure
 
 ```text
 WaveFilter-Research/
@@ -105,6 +156,7 @@ WaveFilter-Research/
 │   └── validation_summary.csv
 ├── figures/
 │   ├── README.md
+│   ├── real_examples.md
 │   ├── research_architecture.svg
 │   └── synthetic_wave_state_demo.svg
 └── notebooks/
@@ -114,17 +166,17 @@ WaveFilter-Research/
 
 ## Skills demonstrated
 
-This project is intended as a research and engineering portfolio demonstrating work in:
-
 - quantitative time-series analysis
-- Python-based experimental pipelines
+- Python research-pipeline design
 - Pine Script / TradingView deployment
 - causal event labeling and anti-leakage design
 - cross-asset robustness testing
 - sealed holdout methodology
 - bootstrap-based uncertainty analysis
-- research versioning and Champion/Challenger governance
+- transaction-cost and execution-delay evaluation
+- research versioning and Champion / Challenger governance
 - reproducibility and software-validation workflows
+- communicating proprietary quantitative research without disclosing protected implementation details
 
 ## What is intentionally not public
 
@@ -135,19 +187,18 @@ The following are excluded from this repository:
 - private AutoLab implementation
 - raw private research datasets
 - execution-specific trading rules
-- credentials, API keys, exchange account information, or private reports
+- credentials, API keys, account information, and private reports
 
 The goal is to make the **research process auditable without disclosing proprietary implementation details**.
 
 ## Documentation
-
-Start with:
 
 - [`docs/architecture.md`](docs/architecture.md) — conceptual system design
 - [`docs/methodology.md`](docs/methodology.md) — research workflow
 - [`docs/validation_framework.md`](docs/validation_framework.md) — anti-overfitting and holdout protocol
 - [`docs/experiment_history.md`](docs/experiment_history.md) — accepted and rejected research directions
 - [`docs/limitations.md`](docs/limitations.md) — scope and limitations
+- [`figures/real_examples.md`](figures/real_examples.md) — real-market example notes
 - [`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) — synthetic public workflow demonstration
 
 ## Disclaimer

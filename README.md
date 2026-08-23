@@ -21,6 +21,18 @@ The project evolved from a simple visual oscillator into a research framework wi
 - Preserve negative results instead of promoting features only because they improve in-sample performance.
 - Verify consistency between TradingView/Pine execution and an independent Python research implementation.
 
+## Visual overview
+
+![WaveFilter public research architecture](figures/research_architecture.svg)
+
+The figure above shows the public conceptual architecture. Production formulas, source code, and calibrated parameters are intentionally omitted.
+
+A second figure provides a completely synthetic illustration of how market-state and volatility-risk concepts can be communicated without exposing the production indicator:
+
+![Synthetic wave-state example](figures/synthetic_wave_state_demo.svg)
+
+> The synthetic figure is **not production output** and should not be interpreted as a trading example.
+
 ## High-level architecture
 
 ```text
@@ -64,6 +76,18 @@ The project uses a deliberately conservative research process:
 
 These results are research findings, not a claim of future trading profitability.
 
+## Reproducible public demo
+
+[`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) provides a synthetic, non-proprietary demonstration of the research workflow. It includes:
+
+- causal event construction using historical information only
+- time-ordered development / holdout splitting
+- non-directional volatility-risk evaluation
+- block-bootstrap uncertainty analysis
+- explicit separation between research evidence and trading claims
+
+The notebook does **not** reproduce the production WaveFilter algorithm.
+
 ## Repository map
 
 ```text
@@ -80,9 +104,12 @@ WaveFilter-Research/
 ├── results/
 │   └── validation_summary.csv
 ├── figures/
-│   └── README.md
+│   ├── README.md
+│   ├── research_architecture.svg
+│   └── synthetic_wave_state_demo.svg
 └── notebooks/
-    └── README.md
+    ├── README.md
+    └── public_demo.ipynb
 ```
 
 ## Skills demonstrated
@@ -121,6 +148,7 @@ Start with:
 - [`docs/validation_framework.md`](docs/validation_framework.md) — anti-overfitting and holdout protocol
 - [`docs/experiment_history.md`](docs/experiment_history.md) — accepted and rejected research directions
 - [`docs/limitations.md`](docs/limitations.md) — scope and limitations
+- [`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) — synthetic public workflow demonstration
 
 ## Disclaimer
 

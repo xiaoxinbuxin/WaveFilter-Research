@@ -14,11 +14,11 @@ I wanted an indicator that could show directional pressure and changes in market
 
 The next stage was to build the logic around the underlying state rather than around agreement between several finished indicators. Instead of treating RSI, SKDJ, or Stochastic RSI as separate votes, I began experimenting with a single wave-style representation that could summarize pressure more directly.
 
-One of my early versions behaved more like a swing-position oscillator. It was useful for showing local movement, but I noticed a weakness during strong trends: the line could reach an extreme too easily, leave the extreme too early, or sometimes stay there too long. In other words, it was good at describing where price sat inside a recent swing, but not always good at remembering sustained directional pressure.
+One of the important intermediate versions used a more **SMI / local-range style** idea. It was good at showing where price sat inside a recent swing, but the comparison exposed a deeper problem: during strong trends, the line could reach the extreme zones too easily and did not retain enough memory of sustained directional pressure. A stronger reference behavior showed fewer extreme events and better trend persistence, which made the limitation much clearer.
 
-That problem led to an important redesign. I moved away from relying mainly on local swing position and started building the core around **upward and downward pressure**, using RSI-style information as a base. EMA structure was still useful, but I began using it as context for the pressure signal rather than as another independent confirmation layer.
+That mismatch became a turning point. Rather than continuing to tune the local-range oscillator, I moved the core toward an **RSI-based directional-pressure representation with accumulated pressure memory**. The goal was no longer to describe only the current position inside a recent swing. I wanted the line to reflect whether upward or downward pressure had been building over time.
 
-This was a major change in the project. The goal was no longer to make several indicators agree. The goal became to build one state representation that already understood both momentum and market context.
+EMA structure was still useful, but I began using it as context for the pressure signal rather than as another independent confirmation layer. This was a major change in the project: the goal was no longer to make several indicators agree, but to build one state representation that already understood both momentum and market context.
 
 ## Using trend context without simply adding more lag
 

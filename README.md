@@ -18,6 +18,16 @@ A second question became just as important during development: when a new featur
 
 That led me to use a **Champion / Challenger** workflow. A stable version is kept as the Champion, while each new idea is tested separately as a Challenger. If an idea does not survive the same validation process, it is rejected rather than added to the indicator.
 
+## How the project started
+
+My first version was not a separate market-state system. I began by combining indicators I already used, especially **SKDJ, RSI, and Stochastic RSI**, because I expected agreement between several momentum indicators to produce cleaner signals.
+
+The main problem was delay. Waiting for several indicators to confirm the same move often meant that part of the move had already happened. Adding more confirmation reduced some noise, but it also made the signal slower and the logic more complicated.
+
+That pushed me away from indicator voting and toward building my own state logic around directional pressure, evidence, and structural change. I also began separating the responsive visible wave from the more conservative internal state so that every small fluctuation would not automatically become a formal reversal.
+
+The full development story, including how my approach changed from chart tuning to systematic testing, is in [`docs/development_story.md`](docs/development_story.md).
+
 ## Selected results
 
 | Research component | Result | Decision |
@@ -123,7 +133,7 @@ WaveFilter-Research/
 ├── README.md
 ├── NOTICE.md
 ├── requirements.txt
-├── docs/          research design and validation notes
+├── docs/          development story, research design, and validation notes
 ├── results/       public decision summary
 ├── figures/       architecture and chart examples
 └── notebooks/     synthetic reproducible demo
@@ -131,6 +141,7 @@ WaveFilter-Research/
 
 Useful starting points:
 
+- [`docs/development_story.md`](docs/development_story.md) — how the indicator developed from early oscillator combinations into the current research framework
 - [`docs/architecture.md`](docs/architecture.md) — system design
 - [`docs/methodology.md`](docs/methodology.md) — research workflow
 - [`docs/validation_framework.md`](docs/validation_framework.md) — holdout and anti-overfitting rules

@@ -1,6 +1,6 @@
 # Experiment History
 
-This file summarizes selected research directions at a non-proprietary level. It intentionally excludes production formulas and exact parameter values.
+This file summarizes selected research directions at a non-proprietary level. It intentionally excludes production formulas, exact parameter values, private event-level diagnostics, and execution-specific rules.
 
 | Research direction | Outcome | Interpretation |
 |---|---|---|
@@ -14,6 +14,21 @@ This file summarizes selected research directions at a non-proprietary level. It
 | Divergence as a trading signal | Not validated | Selected development results did not survive sealed-holdout robustness requirements |
 | Non-directional volatility warning | Retained | Demonstrated reproducible information about future volatility risk |
 
-## Research principle
+## How to interpret the table
 
-A failed experiment is not removed from the record. Negative results help prevent repeated overfitting and document why the production system remains simpler than the full set of ideas that were explored.
+**Retained** means the component survived the relevant validation requirements for its stated role. It does not imply universal market validity or guaranteed profitability.
+
+**Rejected** means the hypothesis failed one or more required research gates and was not added to the validated production logic.
+
+**Not validated** means the idea may still be useful for visual interpretation or further research, but the evidence did not justify promoting it to independent trading logic.
+
+## Why negative results are preserved
+
+A failed experiment is not removed from the research record. Negative results help:
+
+- prevent repeated testing of already weak hypothesis families;
+- document why the production system remains simpler than the full set of ideas explored;
+- distinguish research discipline from feature accumulation;
+- make the public portfolio more representative of the actual model-selection process.
+
+The compact machine-readable public summary is available in [`../results/validation_summary.csv`](../results/validation_summary.csv). The decision framework is documented in [`validation_framework.md`](validation_framework.md).

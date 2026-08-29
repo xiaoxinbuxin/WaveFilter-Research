@@ -20,11 +20,24 @@ data/private/
 credentials*
 secrets*
 
-# Local artifacts
-.DS_Store
+# Python / notebook artifacts
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+notebooks/*.executed.ipynb
+
+# Local environments and build artifacts
 .venv/
 venv/
 dist/
+build/
 runs/
+
+# OS / editor artifacts
+.DS_Store
+.vscode/
+.idea/

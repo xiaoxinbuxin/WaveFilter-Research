@@ -1,0 +1,88 @@
+name: Public demo CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "notebooks/public_demo.ipynb"
+      - "requirements.txt"
+      - "results/validation_summary.csv"
+      - ".github/workflows/public-demo.yml"
+  pull_request:
+    paths:
+      - "notebooks/public_demo.ipynb"
+      - "requirements.txt"
+      - "results/validation_summary.csv"
+      - ".github/workflows/public-demo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproducibility-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Validate public result schema
+        run: |
+          python - <<'PY'
+          import pandas as pd
+
+          frame = pd.read_csv("results/validation_summary.csv")
+          required = {"module", "status", "public_result", "notes"}
+          missing = required.difference(frame.columns)
+          if missing:
+              raise SystemExit(f"Missing required columns: {sorted(missing)}")
+          if frame.empty:
+              raise SystemExit("validation_summary.csv must not be empty")
+          print(f"Validated {len(frame)} public research-result rows.")
+          PY
+
+      - name: Execute synthetic public notebook
+        env:
+          MPLBACKEND: Agg
+        run: |
+          mkdir -p /tmp/wavefilter-notebook
+          jupyter nbconvert \
+            --to notebook \
+            --execute notebooks/public_demo.ipynb \
+            --output public_demo.executed.ipynb \
+            --output-dir /tmp/wavefilter-notebook \
+            --ExecutePreprocessor.timeout=180
+          test -s /tmp/wavefilter-notebook/public_demo.executed.ipynb
+
+      - name: Confirm proprietary files are absent
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          forbidden_suffixes = {".pine", ".parquet", ".feather", ".pkl", ".pickle"}
+          forbidden_dirs = {"private", "proprietary", "AutoLab", "raw_data"}
+          findings = []
+          for path in Path(".").rglob("*"):
+              if ".git" in path.parts:
+                  continue
+              if path.is_file() and path.suffix in forbidden_suffixes:
+                  findings.append(str(path))
+              if path.is_dir() and path.name in forbidden_dirs:
+                  findings.append(str(path))
+          if findings:
+              raise SystemExit("Public-disclosure boundary violation: " + ", ".join(findings))
+          print("Public-disclosure boundary check passed.")
+          PY

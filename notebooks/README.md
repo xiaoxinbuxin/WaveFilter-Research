@@ -14,6 +14,30 @@ This directory contains reproducible, non-proprietary demonstrations of the rese
 
 The notebook is intentionally illustrative. Its thresholds, synthetic data generator, and event logic are **not** the production indicator and are not calibrated from the private research system.
 
+## Run locally
+
+From the repository root:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+jupyter notebook notebooks/public_demo.ipynb
+```
+
+For a non-interactive reproducibility check:
+
+```bash
+jupyter nbconvert \
+  --to notebook \
+  --execute notebooks/public_demo.ipynb \
+  --output public_demo.executed.ipynb \
+  --output-dir /tmp
+```
+
+GitHub Actions runs the same public notebook automatically through [`.github/workflows/public-demo.yml`](../.github/workflows/public-demo.yml).
+
 ## Not included
 
 - production indicator formulas

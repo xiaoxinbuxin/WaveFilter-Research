@@ -45,7 +45,7 @@ A compact decision record is available in [`results/validation_summary.csv`](res
 
 ## System overview
 
-![WaveFilter public research architecture](figures/research_architecture.svg)
+![WaveFilter public research architecture](figures/research_architecture_v2.svg)
 
 ```text
 Market data

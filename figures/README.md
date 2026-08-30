@@ -6,7 +6,7 @@ This directory contains **public-safe, non-proprietary visualizations** for the 
 
 ### Research diagrams
 
-- [`research_architecture.svg`](research_architecture.svg) — conceptual system architecture, including the causal core, independent challenger modules, and validation governance.
+- [`research_architecture_v2.svg`](research_architecture_v2.svg) — conceptual system architecture, including the causal core, independent challenger modules, and validation governance.
 - [`synthetic_wave_state_demo.svg`](synthetic_wave_state_demo.svg) — synthetic illustration of price, wave-state behavior, and generic volatility-risk windows. It is **not** production output.
 
 ### Real-market screenshots

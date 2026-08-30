@@ -83,6 +83,6 @@
 
   <text x="60" y="604" class="section">Validation governance</text>
   <rect x="60" y="626" width="1080" height="62" class="validation"/>
-  <text x="600" y="651" class="label">Champion / Challenger → Time-Ordered Development → Sealed Holdout → Parity Checks → Block Bootstrap → Cost & Delay Stress</text>
+  <text x="600" y="651" class="label">Champion / Challenger → Time-Ordered Development → Sealed Holdout → Parity Checks → Block Bootstrap → Cost &amp; Delay Stress</text>
   <text x="600" y="674" class="small">Candidates are rejected when robustness or holdout gates fail, even when development results look attractive.</text>
 </svg>

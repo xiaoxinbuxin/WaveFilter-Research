@@ -103,21 +103,33 @@ Depending on the experiment, I also check MFE/MAE, regret or reversal rates, con
 
 The full public protocol is documented in [`docs/methodology.md`](docs/methodology.md) and [`docs/validation_framework.md`](docs/validation_framework.md).
 
-## Real-market examples
+## Current Cross-Market Examples
 
-These screenshots show visible output only. They are examples of how the indicator behaves on different markets and timeframes, not trading recommendations.
+These selected TradingView screenshots illustrate the current visible WaveFilter output across cryptocurrency, an equity ETF, an individual equity, and a commodity. They show visual state behavior in different market contexts; they do not establish strategy profitability or cross-market statistical validity and are not trading recommendations.
 
-### Bitcoin / BTCUSDT perpetual — 1H
+### Bitcoin / BTCUSD (CRYPTO) — 1H
 
-![BTCUSDT WaveFilter example](figures/btc_wavefilter_real.jpg)
+![BTCUSD (CRYPTO), 1H — current WaveFilter chart example](figures/btcusd_crypto_1h_current.png)
 
-### NVIDIA / NVDA — 4H
+The visible wave repeatedly occupies the lower extreme region during the sustained decline on the right of the chart, then rises as price rebounds. The snapshot illustrates lower-zone persistence and recovery in a cryptocurrency context.
 
-![NVDA WaveFilter example](figures/nvda_wavefilter_real.jpg)
+### Invesco QQQ Trust / QQQ (NASDAQ ETF) — 4H
 
-### Gold / XAUUSD — 1H
+![QQQ (NASDAQ ETF), 4H — current WaveFilter chart example](figures/qqq_nasdaq_4h_current.png)
 
-![XAUUSD WaveFilter example](figures/xauusd_wavefilter_real.jpg)
+The ETF view spans an advance, repeated pullbacks, and a later decline with a rebound. The lower panel shows alternating wave states and repeated visits to both extreme regions across that sequence.
+
+### NVIDIA / NVDA (NASDAQ) — 4H
+
+![NVDA (NASDAQ), 4H — current WaveFilter chart example](figures/nvda_nasdaq_4h_current.png)
+
+The individual-equity view shows repeated upper- and lower-zone episodes through advances, declines, and recoveries. Numbered annotations and shaded intervals provide visible context alongside the wave.
+
+### Gold (TVC) — 1H
+
+![TVC Gold, 1H — current WaveFilter chart example](figures/gold_tvc_1h_current.png)
+
+The TVC Gold view covers an initial advance followed by a decline and several rebounds. The visible wave alternates between extreme regions and intermediate states as the price path changes.
 
 Notes for the examples are in [`figures/real_examples.md`](figures/real_examples.md).
 

@@ -4,35 +4,27 @@
 
 **Research on causal market-state filtering, volatility risk, and robust validation in financial time series.**
 
-I started WaveFilter as a visual oscillator for tracking directional pressure. As I kept testing it, the project became less about adding signals and more about deciding which ideas were actually reliable enough to keep.
-
-This repository is the public research record for that process. It shows the methodology, validation framework, selected results, synthetic demonstrations, and examples of the visible indicator. The production implementation, exact formulas, calibrated parameters, and private research pipeline are not public.
-
-## What I am studying
-
-The main question is:
-
 > **Can a market-state filter respond to meaningful structural change without becoming overly sensitive to short-lived noise?**
 
-A second question became just as important during development: when a new feature looks better on a chart, does it still help after causal testing, cross-asset validation, execution assumptions, and a sealed holdout?
+My work on WaveFilter focuses on separating a responsive visible wave from a more conservative structural state, evaluating new features through a Champion / Challenger process, and documenting why some ideas are retained or rejected. This repository presents that research process, a runnable synthetic evaluation example, and selected indicator screenshots.
 
-That led me to use a **Champion / Challenger** workflow. A stable version is kept as the Champion, while each new idea is tested separately as a Challenger. If an idea does not survive the same validation process, it is rejected rather than added to the indicator.
+## Start here
 
-## How the project started
+| Material | What you can inspect | Evidence boundary |
+|---|---|---|
+| [Executed public demo](results/public_demo_results.md) | Sample counts, event rates, uncertainty, boundary audit, and chart; [notebook with saved outputs](notebooks/public_demo.ipynb) | Synthetic evaluation example; does not reproduce the production indicator or private-study results |
+| [Research decisions](#selected-research-decisions) | Retained and rejected directions and the reasoning behind them | Author-reported private research; [public evidence limits](results/private_study_context.md) |
+| [Market examples](#current-cross-market-examples) | Visible output on BTCUSD, QQQ, NVDA, and TVC Gold | Selected screenshots; not evidence of profitability or cross-market statistical validity |
 
-My first version was not a separate market-state system. I began by combining indicators I already used, especially **SKDJ, RSI, and Stochastic RSI**, because I expected agreement between several momentum indicators to produce cleaner signals.
+Production source, exact formulas, calibrated parameters, and the private research pipeline are outside this repository. See [Scope](#scope) and [NOTICE.md](NOTICE.md).
 
-The main problem was delay. Waiting for several indicators to confirm the same move often meant that part of the move had already happened. Adding more confirmation reduced some noise, but it also made the signal slower and the logic more complicated.
+## Reproducible public demo
 
-That pushed me away from indicator voting and toward building my own state logic around directional pressure, evidence, and structural change. I also began separating the responsive visible wave from the more conservative internal state so that every small fluctuation would not automatically become a formal reversal.
+The [executed results snapshot](results/public_demo_results.md) provides the actual synthetic results, including unfavorable outcomes. The [notebook](notebooks/public_demo.ipynb) contains saved tables and a chart, so the output can be inspected without running code.
 
-The full development story, including how my approach changed from chart tuning to systematic testing, is in [`docs/development_story.md`](docs/development_story.md). A shorter stage-by-stage version is in [`docs/development_timeline.md`](docs/development_timeline.md).
+The example demonstrates causal feature construction, complete future labels, a purged chronological development / holdout split, non-directional volatility-risk evaluation, and block-bootstrap uncertainty. It does not reproduce the private WaveFilter algorithm or its reported results. The original public-demo settings and seeds are retained.
 
-## Current research milestone
-
-The current public milestone is based on the **v21.8.24** WaveFilter line developed in September 2026. After additional audit, causal replay, and locked validation, the core wave-state framework remained the retained baseline. A simplified **single non-directional volatility-warning layer** was kept for its specific role, while several alternative predictive, multi-timeframe, divergence, and faster-response ideas were not promoted when they did not show sufficiently stable incremental value.
-
-The public repository records that development decision without publishing the production Pine Script, private replay outputs, exact formulas, or calibrated parameters.
+[Run instructions](notebooks/README.md) explain how to regenerate the artifacts. Dependencies are in [requirements.txt](requirements.txt), with the snapshot's exact versions in [public_demo_run.json](results/public_demo_run.json). GitHub Actions runs boundary regression checks, executes the notebook, and checks the generated numeric tables.
 
 ## Selected research decisions
 
@@ -50,59 +42,29 @@ The negative results are intentional. They are part of the project because they 
 
 A compact decision record is available in [`results/validation_summary.csv`](results/validation_summary.csv), with more context in [`docs/experiment_history.md`](docs/experiment_history.md).
 
+## Development background
+
+I began by combining **SKDJ, RSI, and Stochastic RSI**, but extra confirmation introduced delay and complexity. That led me toward directional-pressure state logic, separation of the visible wave from structural confirmation, and systematic testing of proposed changes.
+
+The current public milestone is **v21.8.24** (September 2026). The development record describes retaining the core wave-state framework and a single non-directional volatility-warning layer while rejecting or restricting several alternative modules.
+
+For the full account, read the [development story](docs/development_story.md); for a shorter stage-by-stage account, use the [timeline](docs/development_timeline.md).
+
 ## System overview
 
 ![WaveFilter public research architecture](figures/research_architecture_v2.svg)
 
-```text
-Market data
-    ↓
-Momentum & structural features
-    ↓
-Robust noise normalization
-    ↓
-Evidence accumulation
-    ↓
-Internal structural state
-    ↓
-Visible wave-state representation
-    ↓
-Independent research modules
-```
+The visible wave and the internal structural state are treated separately, allowing visual responsiveness without making every fluctuation a formal reversal. Volatility warnings are also separate from directional claims: they concern a higher-volatility environment, not whether price will rise or fall.
 
-The visible wave and the internal structural state are treated separately. This lets the display respond more naturally without forcing every visual move to become a formal structural reversal.
-
-Volatility warnings are also kept separate from directional claims. Their purpose is to identify a higher-volatility environment, not to predict whether price will rise or fall.
-
-More detail is in [`docs/architecture.md`](docs/architecture.md).
+See [Architecture](docs/architecture.md) for the conceptual pipeline and module responsibilities.
 
 ## How I test new ideas
 
-I use time-ordered data rather than random train/test shuffling. Events are evaluated from the bar where they become observable, not from an earlier pivot that can only be identified later.
+A stable **Champion** is kept while each new idea is tested as a separate **Challenger**. The documented workflow moves from development diagnostics through causal and platform-parity checks, cross-dataset evaluation, frozen rules and pass/fail gates, and a sealed holdout to a retain, restrict, or reject decision.
 
-For production-relevant changes, the typical sequence is:
+Events are evaluated from the bar where they become observable, using time-ordered data. Depending on the experiment, checks include confirmation delay, reversals, MFE/MAE, remaining opportunity, transaction costs, slippage, and block-bootstrap uncertainty.
 
-```text
-research idea
-    ↓
-development-only diagnostic
-    ↓
-separate Challenger implementation
-    ↓
-causal and platform-parity checks
-    ↓
-cross-asset / cross-timeframe tests
-    ↓
-freeze rules and pass/fail gates
-    ↓
-open sealed holdout once
-    ↓
-promote, restrict, or reject
-```
-
-Depending on the experiment, I also check MFE/MAE, regret or reversal rates, confirmation delay, remaining opportunity after confirmation, transaction costs, slippage, and block-bootstrap uncertainty.
-
-The full public protocol is documented in [`docs/methodology.md`](docs/methodology.md) and [`docs/validation_framework.md`](docs/validation_framework.md).
+The public protocol is described in [Methodology](docs/methodology.md) and [Validation framework](docs/validation_framework.md). These documents describe the research process; the directly runnable public example is the synthetic demo above.
 
 ## Current Cross-Market Examples
 
@@ -134,41 +96,15 @@ The TVC Gold view covers an initial advance followed by a decline and several re
 
 Notes for the examples are in [`figures/real_examples.md`](figures/real_examples.md).
 
-## Reproducible public demo
-
-Read the [executed results snapshot](results/public_demo_results.md) for the actual synthetic sample counts, event rates, bootstrap interval, boundary audit, and chart. The [notebook](notebooks/public_demo.ipynb) also includes saved outputs, so it can be inspected without running code.
-
-[`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) is a small synthetic example of the research workflow. It demonstrates:
-
-- causal feature construction without look-ahead
-- complete future labels and a purged time-ordered development / holdout split
-- non-directional volatility-risk evaluation
-- block-bootstrap uncertainty analysis
-
-It does not reproduce the private WaveFilter algorithm or the reported private-study numbers. The demo settings and seeds are retained from the original public example, including when outcomes are unfavorable. [Run instructions](notebooks/README.md) explain how to regenerate the saved artifacts. The environment is listed in [`requirements.txt`](requirements.txt), with the snapshot's exact versions in [`results/public_demo_run.json`](results/public_demo_run.json). GitHub Actions runs boundary regression checks and executes the notebook.
-
 ## Repository guide
 
-```text
-WaveFilter-Research/
-├── README.md
-├── NOTICE.md
-├── requirements.txt
-├── docs/          development story, research design, and validation notes
-├── results/       public decision summary
-├── figures/       architecture and chart examples
-└── notebooks/     synthetic reproducible demo
-```
-
-Useful starting points:
-
-- [`docs/development_story.md`](docs/development_story.md) — narrative of how the indicator developed from early oscillator combinations into the current research framework
-- [`docs/development_timeline.md`](docs/development_timeline.md) — stage-by-stage development path and current public milestone
-- [`docs/architecture.md`](docs/architecture.md) — system design
-- [`docs/methodology.md`](docs/methodology.md) — research workflow
-- [`docs/validation_framework.md`](docs/validation_framework.md) — holdout and anti-overfitting rules
-- [`docs/experiment_history.md`](docs/experiment_history.md) — retained and rejected directions
-- [`docs/limitations.md`](docs/limitations.md) — scope and limitations
+| Directory | Contents |
+|---|---|
+| [docs/](docs/README.md) | Development history, architecture, methodology, validation, and limitations |
+| [results/](results/README.md) | Executed synthetic outputs and separate private-study decision summaries |
+| [notebooks/](notebooks/README.md) | Public synthetic demo and run instructions |
+| [figures/](figures/README.md) | Architecture, synthetic chart, and market screenshots |
+| [tests/](tests/test_public_demo.py) | Public-demo labeling and split-boundary regression checks |
 
 ## Scope
 

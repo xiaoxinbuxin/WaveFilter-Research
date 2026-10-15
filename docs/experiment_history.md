@@ -2,6 +2,12 @@
 
 This file summarizes selected research directions at a non-proprietary level. It intentionally excludes production formulas, exact parameter values, private event-level diagnostics, and execution-specific rules.
 
+## Current public baseline
+
+The current public milestone is **v21.8.24** (September 2026). After additional audit, causal replay, and locked validation, the core WaveFilter line remained the retained baseline. The project also retained a simplified single non-directional volatility-warning layer for its narrower role, while several challenger ideas were not promoted when they failed to show stable incremental value across the relevant validation checks.
+
+This section records the model-selection decision only; private metrics, event-level outputs, Pine source, and calibrated parameters remain outside the public repository.
+
 | Research direction | Outcome | Interpretation |
 |---|---|---|
 | Core wave-state filtering | Retained | Stable production Champion after iterative validation |

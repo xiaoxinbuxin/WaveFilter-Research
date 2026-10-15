@@ -1,0 +1,3 @@
+split,bars,events,baseline_high_vol_rate,event_high_vol_rate,lift
+development,4326,39,0.227693018955,0.230769230769,0.00307621181408
+holdout,1494,21,0.163319946452,0.142857142857,-0.0204628035953

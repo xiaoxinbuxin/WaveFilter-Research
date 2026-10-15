@@ -9,6 +9,10 @@ This directory contains **public-safe, non-proprietary visualizations** for the 
 - [`research_architecture_v2.svg`](research_architecture_v2.svg) — conceptual system architecture, including the causal core, independent challenger modules, and validation governance.
 - [`synthetic_wave_state_demo.svg`](synthetic_wave_state_demo.svg) — synthetic illustration of price, wave-state behavior, and generic volatility-risk windows. It is **not** production output.
 
+### Executed public demo
+
+- [`public_demo_synthetic.png`](public_demo_synthetic.png) — generated synthetic price and illustrative event chart from the [executed notebook](../notebooks/public_demo.ipynb). See [the results snapshot](../results/public_demo_results.md) for the accompanying metrics and limitations. This is not output from the private indicator.
+
 ### Current Cross-Market Examples
 
 - [`btcusd_crypto_1h_current.png`](btcusd_crypto_1h_current.png) — **BTCUSD (CRYPTO), 1H.** Repeated lower-zone episodes during a sustained decline, followed by a visible wave recovery as price rebounds.

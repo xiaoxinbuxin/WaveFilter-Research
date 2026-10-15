@@ -1,10 +1,22 @@
 # Public Results
 
-This directory contains compact, non-proprietary research summaries intended for portfolio review and reproducibility checks.
+This directory separates reproducible synthetic-demo output from author-reported private-research decisions.
+
+## Executed public demo
+
+Start with [the readable results snapshot](public_demo_results.md). Its tables and chart are generated from the public notebook's synthetic data only.
+
+- [Aggregate metrics](public_demo_summary.csv)
+- [Bootstrap summary](public_demo_bootstrap.csv)
+- [Boundary audit](public_demo_split_audit.csv)
+- [Software versions and public-demo settings](public_demo_run.json)
+- [Executed notebook](../notebooks/public_demo.ipynb) and [run instructions](../notebooks/README.md)
+
+These artifacts do not reproduce or validate the private WaveFilter model.
 
 ## `validation_summary.csv`
 
-The table records selected research directions and their public disposition.
+The table records previously reported research directions and decisions from private studies. It is a decision record, not an independently reproducible empirical dataset. See [Private-study context](private_study_context.md) for the provenance and missing context of the previously published numerical claims.
 
 | Column | Meaning |
 |---|---|
@@ -17,7 +29,7 @@ The table records selected research directions and their public disposition.
 
 ### Retained
 
-The component survived the relevant research gates and remains part of the validated research framework. `Retained` does not imply guaranteed profitability or universal generalization.
+The author reports that the component survived the relevant research gates and was retained. This status does not mean that those private studies have been independently reproduced here, nor does it imply guaranteed profitability or universal generalization.
 
 ### Rejected
 

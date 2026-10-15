@@ -1,0 +1,10 @@
+metric,value
+block_size_bars,72
+requested_resamples,2000
+valid_resamples,2000
+skipped_no_event,0
+bootstrap_mean_lift,-0.017414693271
+p05,-0.125238529877
+median,-0.0255542976018
+p95,0.119766566265
+fraction_positive_resamples,0.3775

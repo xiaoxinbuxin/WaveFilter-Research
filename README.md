@@ -26,7 +26,13 @@ The main problem was delay. Waiting for several indicators to confirm the same m
 
 That pushed me away from indicator voting and toward building my own state logic around directional pressure, evidence, and structural change. I also began separating the responsive visible wave from the more conservative internal state so that every small fluctuation would not automatically become a formal reversal.
 
-The full development story, including how my approach changed from chart tuning to systematic testing, is in [`docs/development_story.md`](docs/development_story.md).
+The full development story, including how my approach changed from chart tuning to systematic testing, is in [`docs/development_story.md`](docs/development_story.md). A shorter stage-by-stage version is in [`docs/development_timeline.md`](docs/development_timeline.md).
+
+## Current research milestone
+
+The current public milestone is based on the **v21.8.24** WaveFilter line developed in September 2026. After additional audit, causal replay, and locked validation, the core wave-state framework remained the retained baseline. A simplified **single non-directional volatility-warning layer** was kept for its specific role, while several alternative predictive, multi-timeframe, divergence, and faster-response ideas were not promoted when they did not show sufficiently stable incremental value.
+
+The public repository records that development decision without publishing the production Pine Script, private replay outputs, exact formulas, or calibrated parameters.
 
 ## Selected results
 
@@ -141,7 +147,8 @@ WaveFilter-Research/
 
 Useful starting points:
 
-- [`docs/development_story.md`](docs/development_story.md) — how the indicator developed from early oscillator combinations into the current research framework
+- [`docs/development_story.md`](docs/development_story.md) — narrative of how the indicator developed from early oscillator combinations into the current research framework
+- [`docs/development_timeline.md`](docs/development_timeline.md) — stage-by-stage development path and current public milestone
 - [`docs/architecture.md`](docs/architecture.md) — system design
 - [`docs/methodology.md`](docs/methodology.md) — research workflow
 - [`docs/validation_framework.md`](docs/validation_framework.md) — holdout and anti-overfitting rules

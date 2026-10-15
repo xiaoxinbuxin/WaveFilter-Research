@@ -2,6 +2,8 @@
 
 This file summarizes selected research directions at a non-proprietary level. It intentionally excludes production formulas, exact parameter values, private event-level diagnostics, and execution-specific rules.
 
+The outcomes are author-reported decisions from private research. Their underlying experiments cannot be independently reproduced from this repository. See the [private-study evidence context](../results/private_study_context.md); the [public synthetic demo](../results/public_demo_results.md) is a separate example of the workflow.
+
 ## Current public baseline
 
 The current public milestone is **v21.8.24** (September 2026). After additional audit, causal replay, and locked validation, the core WaveFilter line remained the retained baseline. The project also retained a simplified single non-directional volatility-warning layer for its narrower role, while several challenger ideas were not promoted when they failed to show stable incremental value across the relevant validation checks.
@@ -18,7 +20,7 @@ This section records the model-selection decision only; private metrics, event-l
 | Single-timeframe decay warning | Rejected | Implementation parity was verified, but predictive utility did not pass production gates |
 | Multi-timeframe automatic filtering | Rejected | Some development-set separation existed, but executable or cost-adjusted holdout value was insufficient |
 | Divergence as a trading signal | Not validated | Selected development results did not survive sealed-holdout robustness requirements |
-| Non-directional volatility warning | Retained | Demonstrated reproducible information about future volatility risk |
+| Non-directional volatility warning | Retained | Reported information about future volatility risk in private research; public evidence is limited to a summary |
 
 ## How to interpret the table
 

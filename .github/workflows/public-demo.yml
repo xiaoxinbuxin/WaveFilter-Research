@@ -5,12 +5,18 @@ on:
     branches: [main]
     paths:
       - "notebooks/public_demo.ipynb"
+      - "tests/**"
+      - "results/public_demo*"
+      - "figures/public_demo_synthetic.png"
       - "requirements.txt"
       - "results/validation_summary.csv"
       - ".github/workflows/public-demo.yml"
   pull_request:
     paths:
       - "notebooks/public_demo.ipynb"
+      - "tests/**"
+      - "results/public_demo*"
+      - "figures/public_demo_synthetic.png"
       - "requirements.txt"
       - "results/validation_summary.csv"
       - ".github/workflows/public-demo.yml"
@@ -54,6 +60,16 @@ jobs:
           print(f"Validated {len(frame)} public research-result rows.")
           PY
 
+      - name: Check evaluation boundaries
+        env:
+          MPLBACKEND: Agg
+        run: python -m unittest discover -s tests -v
+
+      - name: Preserve expected synthetic snapshot
+        run: |
+          mkdir -p /tmp/wavefilter-expected
+          cp results/public_demo_summary.csv results/public_demo_bootstrap.csv results/public_demo_split_audit.csv /tmp/wavefilter-expected/
+
       - name: Execute synthetic public notebook
         env:
           MPLBACKEND: Agg
@@ -66,6 +82,27 @@ jobs:
             --output-dir /tmp/wavefilter-notebook \
             --ExecutePreprocessor.timeout=180
           test -s /tmp/wavefilter-notebook/public_demo.executed.ipynb
+
+      - name: Check regenerated outputs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          for name in ("public_demo_summary.csv", "public_demo_bootstrap.csv", "public_demo_split_audit.csv"):
+              expected = pd.read_csv(Path("/tmp/wavefilter-expected") / name)
+              actual = pd.read_csv(Path("results") / name)
+              pd.testing.assert_frame_equal(actual, expected, check_exact=False, rtol=1e-10, atol=1e-12)
+
+          executed = json.loads(Path("/tmp/wavefilter-notebook/public_demo.executed.ipynb").read_text())
+          code_cells = [cell for cell in executed["cells"] if cell["cell_type"] == "code"]
+          assert all(cell["execution_count"] is not None for cell in code_cells)
+          outputs = [output for cell in code_cells for output in cell.get("outputs", [])]
+          assert not any(output["output_type"] == "error" for output in outputs)
+          assert any("image/png" in output.get("data", {}) for output in outputs)
+          print("Synthetic snapshot reproduced; all code cells executed with a saved chart.")
+          PY
 
       - name: Confirm proprietary files are absent
         run: |

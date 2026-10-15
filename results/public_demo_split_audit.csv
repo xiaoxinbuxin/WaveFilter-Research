@@ -1,0 +1,8 @@
+metric,rows
+original_bars,6000
+history_unavailable,168
+incomplete_future_window,6
+valid_label_rows,5826
+development_rows_purged_at_boundary,6
+development_evaluated,4326
+holdout_evaluated,1494

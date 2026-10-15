@@ -34,13 +34,14 @@ The current public milestone is based on the **v21.8.24** WaveFilter line develo
 
 The public repository records that development decision without publishing the production Pine Script, private replay outputs, exact formulas, or calibrated parameters.
 
-## Selected results
+## Selected research decisions
+
+The decisions below are author-reported summaries of private research. The public repository does not independently reproduce those studies. Previously published numerical claims and the limits of their public evidence are collected in [Private-study context](results/private_study_context.md). For directly inspectable output, see the separate [executed synthetic demo](results/public_demo_results.md).
 
 | Research component | Result | Decision |
 |---|---:|---|
 | Core wave-state filter | Stable across repeated challenger tests | **Champion retained** |
-| Standard volatility warning | High-volatility rate increased from **31.2% to 65.4%** in one sealed-holdout study | **Retained as non-directional risk information** |
-| Volatility-warning stability | Positive lift across all 9 evaluated folds in that study | **Retained** |
+| Standard volatility warning | Reported higher future-volatility frequency in a private study; public evidence is limited to a summary | **Retained as non-directional risk information** |
 | Multi-timeframe confirmation | Development evidence did not survive execution-cost / holdout requirements | **Rejected** |
 | Divergence trading extensions | Promising visually, but not robust enough in sealed validation | **Not promoted to trading logic** |
 | Adaptive-threshold / acceleration experiments | Failed stability or regret guardrails | **Rejected** |
@@ -135,14 +136,16 @@ Notes for the examples are in [`figures/real_examples.md`](figures/real_examples
 
 ## Reproducible public demo
 
+Read the [executed results snapshot](results/public_demo_results.md) for the actual synthetic sample counts, event rates, bootstrap interval, boundary audit, and chart. The [notebook](notebooks/public_demo.ipynb) also includes saved outputs, so it can be inspected without running code.
+
 [`notebooks/public_demo.ipynb`](notebooks/public_demo.ipynb) is a small synthetic example of the research workflow. It demonstrates:
 
 - causal feature construction without look-ahead
-- a time-ordered development / holdout split
+- complete future labels and a purged time-ordered development / holdout split
 - non-directional volatility-risk evaluation
 - block-bootstrap uncertainty analysis
 
-It does not reproduce the private WaveFilter algorithm. The environment is listed in [`requirements.txt`](requirements.txt), and GitHub Actions executes the notebook automatically so that the public demo stays reproducible.
+It does not reproduce the private WaveFilter algorithm or the reported private-study numbers. The demo settings and seeds are retained from the original public example, including when outcomes are unfavorable. [Run instructions](notebooks/README.md) explain how to regenerate the saved artifacts. The environment is listed in [`requirements.txt`](requirements.txt), with the snapshot's exact versions in [`results/public_demo_run.json`](results/public_demo_run.json). GitHub Actions runs boundary regression checks and executes the notebook.
 
 ## Repository guide
 

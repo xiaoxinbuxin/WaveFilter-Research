@@ -7,4 +7,4 @@ Adaptive zero-axis thresholding,Rejected,Conditional threshold changes did not g
 Single-timeframe decay warning,Rejected,Implementation parity passed but predictive utility did not,Production warning disabled
 Multi-timeframe automatic filtering,Rejected,Development separation did not survive execution/cost robustness,Not promoted
 Divergence trading application,Not validated,Development performance did not persist in sealed holdout,Research display only
-Standard volatility warning,Retained,High-volatility rate increased from 31.2% baseline to 65.4% after warning,Non-directional risk information
+Standard volatility warning,Retained,Previously reported high-volatility rate of 31.2% baseline and 65.4% after warning,Author-reported private-study summary; not independently reproducible here; see private_study_context.md

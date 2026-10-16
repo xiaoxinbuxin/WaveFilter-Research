@@ -1,4 +1,4 @@
-# WaveFilter Research
+# 波段过滤器 · WaveFilter Research
 
 [![Public demo CI](https://github.com/xiaoxinbuxin/WaveFilter-Research/actions/workflows/public-demo.yml/badge.svg)](https://github.com/xiaoxinbuxin/WaveFilter-Research/actions/workflows/public-demo.yml)
 
@@ -7,6 +7,8 @@
 > **Can a market-state filter respond to meaningful structural change without becoming overly sensitive to short-lived noise?**
 
 My work on WaveFilter focuses on separating a responsive visible wave from a more conservative structural state, evaluating new features through a Champion / Challenger process, and documenting why some ideas are retained or rejected. This repository presents that research process, a runnable synthetic evaluation example, and selected indicator screenshots.
+
+This sub-chart project is named **波段过滤器 (WaveFilter)**. The main-chart work was separated from the same development process to support additional functionality and is documented as [**趋势过滤器 (Trend Filter)**](https://github.com/xiaoxinbuxin/TrendFilter-Research). The two projects share their development origin; evidence for one does not validate the other.
 
 ## Start here
 
